@@ -1,0 +1,26 @@
+# test filter
+
+## set up
+
+```{r setup}
+library(sattagutils)
+```
+# load data
+
+Load a sample data set: `Locations` and `Argos`. I want the secondary positions from `Argos`, but ultimately I'd like to model from the ellipse errors present in `Locations`.
+
+```{r load-data}
+datapath <- "data/ex1"
+
+loc <- sattagutils::rcsv(file.path(datapath, "ex1-Locations.csv"))
+arg <- sattagutils::rcsv(file.path(datapath, "ex1-Argos.csv"))
+```
+
+# combine loc and arg
+
+```{r prep-data}
+loc$date <- sattagutils::date2num(loc$Date, format = "%H:%M:%S %d-%b-%Y", tz = "UTC")
+arg$date <- sattagutils::date2num(arg$Date, format = "%H:%M:%S %d-%b-%Y", tz = "UTC")
+
+
+```
